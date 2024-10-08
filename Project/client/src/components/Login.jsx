@@ -1,97 +1,87 @@
-// function Login(){
-//     return(
-//         <div>
-//             <form>
-//                 <label>Email:</label>
-//                 <input name ="email" type = "email" />
-//                 <br />
-//                 <label>Password:</label>
-//                 <input name = "password" type = "password" />
-//                 <br />
-//                 <button>Submit</button>
-//             </form>
-//         </div>
-//     )
-// }
-
-// export default Login
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 
 export default function Login() {
     const [enteredEmail, setEnteredEmail] = useState("");
     const [enteredPassword, setEnteredPassword] = useState("");
     const [submitted, setSubmitted] = useState(false);
-    const navigate=useNavigate();
+    const navigate = useNavigate();
     // const [message, setMessage] = useState("");
-    
+
     function handleInputChange(identifier, value) {
-        if (identifier === "email") {
+        if (identifier === "Email") {
             setEnteredEmail(value);
         } else {
             setEnteredPassword(value);
         }
     }
-    
+
     const handleLogin = async () => {
         setSubmitted(true);
 
-        const formBody=JSON.stringify({
-            email:enteredEmail,
-            password:enteredPassword
+        const formBody = JSON.stringify({
+            Email: enteredEmail,
+            Password: enteredPassword
         })
 
-        const result= await fetch('http://localhost:8080/user/login',{
-            method:"POST",
-            body:formBody,
-            headers:{
-                'content-type':'application/json'
+        // user.login command to backend
+        const result = await fetch('http://localhost:8080/user/login', {
+            method: "POST",
+            body: formBody,
+            headers: {
+                'content-type': 'application/json'
             }
         });
 
-        if(result.ok){
-            const data=result.json();
+        if (result.ok) {
+            const data = result.json();
             console.log(data)
-            // console.log(result);
-
+            navigate('/emailvalidation')
         }
-        navigate('/dashboard')
+        else{
+            alert("Incorrect credentials");
+        }
+        //navigate('/emailvalidation')
     };
+
 
     const emailNotValid = submitted && !enteredEmail.includes("@");
     const passwordNotValid = submitted && enteredPassword.trim().length < 6;
 
     return (
-        <div id="login">
-            {/* {message && <label>{message}</label>} */}
-            <div className="controls">
-                <p>
-                    <label>Email</label>
-                    <input
-                        type="email"
-                        className={emailNotValid ? "invalid" : undefined}
-                        onChange={(event) => handleInputChange("email", event.target.value)}
-                    />
-                </p>
-                <p>
-                    <label>Password</label>
-                    <input
-                        type="password"
-                        className={passwordNotValid ? "invalid" : undefined}
-                        onChange={(event) =>
-                            handleInputChange("password", event.target.value)
-                        }
-                    />
-                </p>
+        <div>
+            <div>
+                <h1>Login</h1>
             </div>
-            <div className="actions">
-                <button type="button" className="text-button">
-                    Create a new account
-                </button>
+            <form>
+                <label>Email</label>
+                <input
+                    type="Email"
+                    className={emailNotValid ? "invalid" : undefined}
+                    onChange={(event) => handleInputChange("Email", event.target.value)}
+                />
+
+                <label>Password</label>
+                <input
+                    type="Password"
+                    className={passwordNotValid ? "invalid" : undefined}
+                    onChange={(event) => handleInputChange("Password", event.target.value)}
+                />
+            </form>
+
+            <div>
                 <button className="button" onClick={handleLogin}>
                     Sign In
+                </button>
+            </div>
+            <div>
+                <button className="text-button" onClick={() => navigate('/createaccount')}>
+                    Create a new account
+                </button>
+            </div>
+            <div>
+                <button className="text-button" onClick={() => navigate('/emailrecovery')}>
+                    Forgot Password?
                 </button>
             </div>
         </div>
