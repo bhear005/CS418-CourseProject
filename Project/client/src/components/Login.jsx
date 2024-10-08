@@ -43,13 +43,13 @@ export default function Login() {
             password:enteredPassword
         })
 
-        const result= await fetch('http://localhost:8080/user/login',{
-            method:"POST",
-            body:formBody,
-            headers:{
-                'content-type':'application/json'
-            }
-        });
+        // const result= await fetch('http://localhost:8080/user/login',{
+        //     method:"POST",
+        //     body:formBody,
+        //     headers:{
+        //         'content-type':'application/json'
+        //     }
+        // });
 
         if(result.ok){
             const data=result.json();
