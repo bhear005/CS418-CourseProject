@@ -237,10 +237,10 @@ user.post("/check/email", (req, res) => {
 // Actually resets password
 user.put("/change/password", (req, res) => {
   const hashedPassword = HashedPassword(req.body.Password)
-  console.log(req.body.Email);
-  console.log(req.body.Password);
+  //console.log(req.body.Email);
+  //console.log(req.body.Password);
 
-
+  SendMail(req.body.Email,"Password Reset", "Reset Password Link: http://localhost:5173/PasswordReset")
   connection.execute(
     "update user_information set Password=? where Email=?",
     [hashedPassword, req.body.Email],
