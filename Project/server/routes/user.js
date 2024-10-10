@@ -47,19 +47,24 @@ user.get("/:id", (req, res) => {
 user.post("/email/validation", (req, res) => {
  
   connection.execute(
-    "select Validation_Code from user_information where email=?",
+    "select Validation_Code from user_information where Email=?",
     [req.body.Email],
     function (err, result) {
       if (err) {
         res.json(err.message);
       } 
       else {
-       if(result[0].Validation_code === req.body.Validation_code){
+        console.log(result[0].Validation_Code);
+        console.log(req.body.Validation_Code);
+       if(result[0].Validation_Code === req.body.Validation_Code){
           res.json({
              status: 200,
              message: "User has been verified",
             data: result,
           });
+       }
+       else{
+          res.json(err.message);
        } 
       }
     }
@@ -110,10 +115,11 @@ user.post("/", (req, res) => {
 // });
 
 
-user.put("/:id", (req, res) => {
+user.put("/:Email", (req, res) => {
+  const hashedPassword = HashedPassword(req.body.Password)
   connection.execute(
-    "update user_information set First_Name=? , Last_Name=? where user_id=?",
-    [req.body.First_Name, req.body.Last_Name, req.params.id],
+    "update user_information set First_Name=? , Last_Name=?, Password=? where Email=?",
+    [req.body.First_Name, req.body.Last_Name, hashedPassword, req.params.Email],
     function (err, result) {
       if (err) {
         res.json(err.message);
@@ -141,8 +147,6 @@ user.post("/login", (req, res) => {
       if (err) {
         res.json(err.message);
       } else {
-        console.log(result[0].Password);
-        console.log(req.body.Password);
         if (ComparePasword(req.body.Password, result[0].Password)) {
           console.log("in if statement");
           SendMail(req.body.Email, "Login Verification", `Your login verification is ${randomIntRange()}`)

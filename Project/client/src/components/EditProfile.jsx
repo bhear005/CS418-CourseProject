@@ -84,7 +84,7 @@ export default function EditProfile() {
             </form>
             <div>
                 <button className="button" onClick={handleEditProfile}>
-                    Create Account
+                    Edit Account
                 </button>
             </div>
         </div>

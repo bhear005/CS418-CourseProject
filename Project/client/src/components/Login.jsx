@@ -37,8 +37,12 @@ export default function Login() {
             const data = result.json();
             console.log(data)
             navigate('/emailvalidation')
+            // alert("Incorrect credentials");
         }
         else{
+            // const data = result.json();
+            // console.log(data)
+            // navigate('/emailvalidation')
             alert("Incorrect credentials");
         }
         //navigate('/emailvalidation')
