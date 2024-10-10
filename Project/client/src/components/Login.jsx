@@ -6,6 +6,7 @@ export default function Login() {
     const [enteredPassword, setEnteredPassword] = useState("");
     const [submitted, setSubmitted] = useState(false);
     const navigate = useNavigate();
+    //let admin = false;
     // const [message, setMessage] = useState("");
 
     function handleInputChange(identifier, value) {
@@ -25,27 +26,30 @@ export default function Login() {
         })
 
         // user.login command to backend
-        const result = await fetch('http://localhost:8080/user/login', {
-            method: "POST",
-            body: formBody,
-            headers: {
-                'content-type': 'application/json'
+        const result= await fetch('http://localhost:8080/user/login',{
+            method:"POST",
+            body:formBody,
+            headers:{
+                'content-type':'application/json'
             }
         });
-
-        if (result.ok) {
-            const data = result.json();
+        if(result.ok){
+            const data=result.json();
             console.log(data)
+            console.log(result);
+            fetch('http://localhost:8080/user/send/email', {
+                method: "POST",
+                body:formBody,
+                headers:{
+                    'content-type':'application/json'
+                }
+            });
+            localStorage.setItem("Email",enteredEmail);
             navigate('/emailvalidation')
-            // alert("Incorrect credentials");
         }
         else{
-            // const data = result.json();
-            // console.log(data)
-            // navigate('/emailvalidation')
-            alert("Incorrect credentials");
+            alert("Invalid credentials!");
         }
-        //navigate('/emailvalidation')
     };
 
 

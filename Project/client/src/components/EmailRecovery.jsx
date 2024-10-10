@@ -26,8 +26,8 @@ export default function Recover(){
         if(result.ok) {
             const data = result.json();
             console.log(data)
+            localStorage.setItem("Email",enteredEmail);
         }
-        localStorage.setItem("Email",enteredEmail);
     };
 
     const emailNotValid = submitted && !enteredEmail.includes("@");

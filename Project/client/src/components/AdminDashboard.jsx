@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
-export default function Dashboard(){
+export default function AdminDashboard(){
     const navigate = useNavigate();
     const value = localStorage.getItem("Email");
 
@@ -8,11 +8,11 @@ export default function Dashboard(){
 
     return (<>
     <div id="login">
-        <h1>Welcome {value}!</h1>
+        <h1>Welcome Admin {value}!</h1>
         <div>
-            <button className="text-button" onClick={() => navigate('/editprofile')}>
+            {/* <button className="text-button" onClick={() => navigate('/editprofile')}>
                 Edit account info
-            </button>
+            </button> */}
         </div>
     </div>
     </>);

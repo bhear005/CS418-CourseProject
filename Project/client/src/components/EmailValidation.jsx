@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function EmailValidation(){
     const value = localStorage.getItem("Email");
+    const admin = localStorage.getItem("admin");
     const [enteredCode, setEnteredCode] = useState("");
     const [submitted, setSubmitted] = useState(false);
     const navigate = useNavigate();
@@ -33,7 +34,7 @@ export default function EmailValidation(){
             navigate('/dashboard')
         }
         else{
-            alert("Incorrect code");
+            alert("Invalid Code");
         }
     };
 

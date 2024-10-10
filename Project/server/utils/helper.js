@@ -7,5 +7,7 @@ export function HashedPassword(password)
 }
 
 export function ComparePasword(raw,hashedPassword){
+    // console.log(raw);
+    // console.log(hashedPassword);
     return compareSync(raw,hashedPassword)
 }

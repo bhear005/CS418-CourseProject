@@ -2,9 +2,9 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function EditProfile() {
+    const value = localStorage.getItem("Email");
     const [enteredFirstName, setEnteredFirstName] = useState("");
     const [enteredLastName, setEnteredLastName] = useState("");
-    const [enteredEmail, setEnteredEmail] = useState("");
     const [enteredPassword, setEnteredPassword] = useState("");
     const [submitted, setSubmitted] = useState(false);
     const navigate = useNavigate();
@@ -19,21 +19,17 @@ export default function EditProfile() {
         else if (identifier === "Password") {
             setEnteredPassword(value);
         }
-        else if (identifier === "Email") {
-            setEnteredEmail(value);
-        }
     }
 
-    const handleEditProfile = async () => {
+    const handleEditFirstName = async () => {
         setSubmitted(true);
 
         const formBody = JSON.stringify({
-            First_Name: enteredFirstName,
-            Last_Name: enteredLastName,
-            Password: enteredPassword
+            Email: value,
+            First_Name: enteredFirstName
         })
 
-        const result = await fetch(`http://localhost:8080/user/${enteredEmail}`, {
+        const result = await fetch('http://localhost:8080/user/First_Name', {
             method: "PUT",
             body: formBody,
             headers: {
@@ -44,16 +40,64 @@ export default function EditProfile() {
         if (result.ok) {
             const data = result.json();
             console.log(data)
-            navigate('/dashboard')
-        }
-        else {
-            alert("Incorrect Email");
+            alert("Account Updated");
         }
     }
 
+    const handleEditLastName = async () => {
+        setSubmitted(true);
+
+        const formBody = JSON.stringify({
+            Email: value,
+            Last_Name: enteredLastName
+        })
+
+        const result = await fetch('http://localhost:8080/user/Last_Name', {
+            method: "PUT",
+            body: formBody,
+            headers: {
+                'content-type': 'application/json'
+            }
+        });
+
+        if (result.ok) {
+            const data = result.json();
+            console.log(data)
+            alert("Account Updated");
+        }
+    }
+
+    function returnToDash(){
+        navigate('/dashboard');
+    }
+
+    const handleEditPassword = async () => {
+        setSubmitted(true);
+
+        const formBody = JSON.stringify({
+            Email: value,
+            Password: enteredPassword
+        })
+
+        const result = await fetch('http://localhost:8080/user/Password', {
+            method: "PUT",
+            body: formBody,
+            headers: {
+                'content-type': 'application/json'
+            }
+        });
+
+        if (result.ok) {
+            const data = result.json();
+            console.log(data)
+            alert("Account Updated");
+        }
+    }
+
+
+
     const firstNameNotValid = submitted && enteredFirstName.trim().length < 6;
     const lastNameNotValid = submitted && enteredLastName.trim().length < 6;
-    const emailNotValid = submitted && !enteredEmail.includes("@");
     const passwordNotValid = submitted && enteredPassword.trim().length < 6;
 
     return (
@@ -62,30 +106,34 @@ export default function EditProfile() {
                 <h1>Edit Profile</h1>
             </div>
             <form>
-                <label>Email (Cannot be edited)</label>
-                <input type="Email" className={emailNotValid ? "invalid" : undefined}
-                    onChange={(event) => handleInputChange("Email", event.target.value)}
-                />
-
                 <label>First Name</label>
                 <input type="text" className={firstNameNotValid ? "invalid" : undefined}
                     onChange={(event) => handleInputChange("First_Name", event.target.value)}
                 />
+                <button className="button" onClick={handleEditFirstName}>
+                    Sumbit
+                </button>
 
                 <label>Last Name</label>
                 <input type="text" className={lastNameNotValid ? "invalid" : undefined}
                     onChange={(event) => handleInputChange("Last_Name", event.target.value)}
                 />
+                <button className="button" onClick={handleEditLastName}>
+                    Submit
+                </button>
 
                 <label>Password</label>
                 <input type="Password" className={passwordNotValid ? "invalid" : undefined}
                     onChange={(event) => handleInputChange("Password", event.target.value)}
                 />
+                <button className="button" onClick={handleEditPassword}>
+                    Submit
+                </button>
             </form>
             <div>
-                <button className="button" onClick={handleEditProfile}>
-                    Edit Account
-                </button>
+            <button className="button" onClick={returnToDash}>
+                    Return
+                </button>                
             </div>
         </div>
     );
