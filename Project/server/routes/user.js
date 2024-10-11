@@ -97,7 +97,7 @@ user.post("/email/validation", (req, res) => {
 user.post("/", (req, res) => {
 
   const hashedPassword = HashedPassword(req.body.Password)
-  SendMail(req.body.Email,"Login Verification", `Your login verification is ${randomIntRange()}`)
+  SendMail(req.body.Email,"Email Verification", `Your Email verification is ${randomIntRange()}`)
   connection.execute(
     "Insert into user_information (First_Name,Last_Name,Email,Password,Validation_Code) values(?,?,?,?,?)",
     [req.body.First_Name, req.body.Last_Name, req.body.Email, hashedPassword,validation],
@@ -210,6 +210,7 @@ user.post("/reset/password", (req,res) => {
   SendMail(req.body.Email,"Password Reset", "Reset Password Link: http://localhost:5173/PasswordReset")
 })
 
+// Check to see if email already exists in database
 user.post("/check/email", (req, res) => {
 
 //console.log(req.body.Email);
@@ -227,9 +228,9 @@ user.post("/check/email", (req, res) => {
         });
         console.log(result);
       }
-      // else {
-      //   res.json(err.message);
-      // }
+      else {
+        return res.status(400).json({ message: 'Email already exists' });
+      }
     }
   );
 });
