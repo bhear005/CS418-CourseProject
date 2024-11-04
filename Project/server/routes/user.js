@@ -2,7 +2,7 @@ import { Router } from "express";
 import { connection } from "../database/database.js";
 import { ComparePasword, HashedPassword } from "../utils/helper.js";
 import { SendMail } from "../utils/SendMail.js";
-import { compare } from "bcrypt";
+// import { compare } from "bcrypt";
 const user = Router();
 
 // Randomly generated code used for email validation
@@ -47,6 +47,28 @@ user.get("/:id", (req, res) => {
     }
   );
 });
+
+// Get data stored in user_information based on entered id param
+user.get("/adminCheck/:email", (req, res) => {
+  connection.execute(
+    "select Admin_Account from user_information where Email=?",
+    [req.params.email],
+    function (err, result) {
+      const tempStr = JSON.stringify(result[0].Admin_Account);
+      if (tempStr != 1) {
+        return res.status(400).json({ message: 'Not Admin Account' });
+      } 
+      else{
+        res.json({
+          status: 200,
+          message: "Response from user get api",
+          data: result,
+        });
+      }
+    }
+  );
+});
+
 
 // Initial email validation 
 user.post("/email/validation", (req, res) => {
@@ -135,26 +157,6 @@ user.post("/", (req, res) => {
 // });
 
 
-// Edit user info based on Email identifier
-// user.put("/:Email", (req, res) => {
-//   const hashedPassword = HashedPassword(req.body.Password)
-//   connection.execute(
-//     "update user_information set First_Name=? , Last_Name=?, Password=? where Email=?",
-//     [req.body.First_Name, req.body.Last_Name, hashedPassword, req.params.Email],
-//     function (err, result) {
-//       if (err) {
-//         res.json(err.message);
-//       } else {
-//         res.json({
-//           status: 200,
-//           message: "Response from user delete api",
-//           data: result,
-//         });
-//       }
-//     }
-//   );
-// });
-
 // Send email for validation code
 user.post("/send/email", (req,res) => {
   SendMail(req.body.Email,"Login Validation", `Your login validation code is ${randomIntRange()}`)
@@ -213,20 +215,16 @@ user.post("/reset/password", (req,res) => {
 // Check to see if email already exists in database
 user.post("/check/email", (req, res) => {
 
-//console.log(req.body.Email);
-
   connection.execute(
     "select email from user_information where email=?",
     [req.body.Email],
     function (err, result) {
       if (result.length <= 0) {
-        console.log("inside if statement");
         res.json({
           status: 200,
           message: "Email is available",
           data: result,
         });
-        console.log(result);
       }
       else {
         return res.status(400).json({ message: 'Email already exists' });
@@ -238,8 +236,6 @@ user.post("/check/email", (req, res) => {
 // Actually resets password
 user.put("/change/password", (req, res) => {
   const hashedPassword = HashedPassword(req.body.Password)
-  //console.log(req.body.Email);
-  //console.log(req.body.Password);
 
   SendMail(req.body.Email,"Password Reset", "Reset Password Link: http://localhost:5173/PasswordReset")
   connection.execute(
@@ -317,30 +313,5 @@ user.put("/Password", (req, res) => {
   );
 });
 
-// Determine if account is an administrator
-user.post("/Admin", (req, res) => {
-  connection.execute(
-    "select Admin_Account from user_information where Email=?",
-    [req.body.Email],
-    function (err, result) {
-      console.log(result[0].Admin_Account);
-      if (err) {
-        res.json(err.message);
-      } else {
-        console.log(result[0].Admin === 1);
-        if (result[0].Admin_Account === 1){
-          res.json({
-            status: 200,
-            message: "Response from user get api",
-            data: result,
-          });
-        }
-        else{
-          return res.status(400).json({ message: 'Not Admin Account' });
-        }
-      }
-    }
-  );
-});
 
 export default user;

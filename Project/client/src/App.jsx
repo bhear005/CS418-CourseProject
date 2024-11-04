@@ -8,6 +8,8 @@ import EmailRecovery from "./components/EmailRecovery";
 import PasswordReset from "./components/PasswordReset";
 import EditProfile from "./components/EditProfile";
 import AdminDashboard from "./components/AdminDashboard";
+import Prerequisite from "./components/Prerequisite";
+import AdvisingHistory from "./components/AdvisingHistory";
 function App() {
 
   return (
@@ -20,6 +22,8 @@ function App() {
     <Route path="/passwordreset" element={<PasswordReset/>}/>
     <Route path="/editprofile" element={<EditProfile/>}/>
     <Route path="/admindashboard" element={<AdminDashboard/>}/>
+    <Route path="/prerequisite" element={<Prerequisite/>}/>
+    <Route path="/advisinghistory" element={<AdvisingHistory/>}/>
     </Routes>
   );
 }

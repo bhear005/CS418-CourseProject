@@ -10,9 +10,24 @@ export default function AdminDashboard(){
     <div id="login">
         <h1>Welcome Admin {value}!</h1>
         <div>
-            {/* <button className="text-button" onClick={() => navigate('/editprofile')}>
+            <button className="text-button" onClick={() => navigate('/prerequisite')}>
+                Edit Student Prerequisite Courses
+            </button>
+        </div>
+        <div>
+            <button className="text-button" onClick={() => navigate('/advisinghistory')}>
+                Advising History
+            </button>
+        </div>
+        <div>
+            <button className="text-button" onClick={() => navigate('/editprofile')}>
                 Edit account info
-            </button> */}
+            </button>
+        </div>
+        <div>
+            <button className="button" onClick={() => navigate('/')}>
+                Sign Out 
+            </button>
         </div>
     </div>
     </>);

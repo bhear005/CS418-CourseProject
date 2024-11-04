@@ -14,6 +14,11 @@ export default function Dashboard(){
                 Edit account info
             </button>
         </div>
+        <div>
+            <button className="button" onClick={() => navigate('/')}>
+                Sign Out 
+            </button>
+        </div>
     </div>
     </>);
 }

@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 
 export default function EmailValidation(){
     const value = localStorage.getItem("Email");
-    const admin = localStorage.getItem("admin");
     const [enteredCode, setEnteredCode] = useState("");
     const [submitted, setSubmitted] = useState(false);
     const navigate = useNavigate();
@@ -28,10 +27,15 @@ export default function EmailValidation(){
             }
         })
 
-        if (result.ok) {
-            const data = result.json();
-            console.log(data)
-            navigate('/dashboard')
+        if (result.ok){
+            const adminValue = await fetch(`http://localhost:8080/user/adminCheck/${value}`)
+
+            if (adminValue.ok){
+                navigate('/admindashboard')
+            }
+            else{
+                navigate('/dashboard')
+            }
         }
         else{
             alert("Invalid Code");

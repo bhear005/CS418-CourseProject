@@ -67,8 +67,14 @@ export default function EditProfile() {
         }
     }
 
-    function returnToDash(){
-        navigate('/dashboard');
+    const returnToDash = async () => {
+    const adminValue = await fetch(`http://localhost:8080/user/adminCheck/${value}`)
+        if (adminValue.ok){
+            navigate('/admindashboard');
+        }
+        else{
+            navigate('/dashboard');
+        }
     }
 
     const handleEditPassword = async () => {

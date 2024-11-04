@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -22,11 +26,17 @@ body {
 }
 
 h1 {
-  font-size: 3.5em;
+  font-size: 2.5em;
+  line-height: 1.1;
+}
+
+h2 {
+  font-size: 1.5em;
   line-height: 1.1;
 }
 
 button {
+  margin-top: 10px;
   border-radius: 8px;
   border: 1px solid transparent;
   padding: 0.6em 1.2em;
@@ -43,10 +53,35 @@ button:hover {
 }
 
 .text-button{
+  font-size: 1.5em;
   background:none;
   border:none;
   margin-top: 10px;
+  margin-bottom: 10px;
   padding:0;
   cursor: pointer;
   text-align: left;
 }
+
+.table-container {
+  margin-top: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 8px;
+  border-bottom: 1px solid #ffffff;
+  text-align: left;
+}
+
+th {
+  background-color: #585858;
+  font-weight: bold;
+}
+
+

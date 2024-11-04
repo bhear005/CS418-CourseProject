@@ -4,6 +4,8 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import express from "express";
 import user from "./routes/user.js";
+import classes from "./routes/classes.js";
+import advisinghistory from "./routes/advisinghistory.js";
 
 const app=express();
 const port=8080; 
@@ -21,6 +23,8 @@ app.use(cors({
 }))
 
 app.use('/user',user);
+app.use('/classes',classes);
+app.use('/advisinghistory',advisinghistory)
 
 // console log that server is running at designated port
 app.listen(port, ()=>{
