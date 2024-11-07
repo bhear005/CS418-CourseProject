@@ -7,7 +7,6 @@ function A_H_StudentView() {
   const navigate = useNavigate();
   localStorage.setItem("Email", value);
 
-
   useEffect(() => {
     (async () => {
       const response = await fetch(
@@ -17,13 +16,9 @@ function A_H_StudentView() {
       const result = await response.json();
 
       const coursesArray = Array.isArray(result.data) ? result.data : [];
-      const dataWithEnabled = coursesArray.map((item) => ({
-        ...item,
-      }));
-      setData(dataWithEnabled);
+      setData(coursesArray);
     })();
   }, []);
-
 
   const returnToDash = async () => {
     const adminValue = await fetch(
@@ -36,11 +31,17 @@ function A_H_StudentView() {
     }
   };
 
+  const handleRowClick = (term) => {
+    const termValue = term;
+    localStorage.setItem("Term", termValue);
+    navigate(`/currentterm`, { state: { term } });
+  };
+
   return (
     <div>
-        <div>
-            <h2>{value} Advising History</h2>
-        </div>
+      <div>
+        <h2>{value} Advising History</h2>
+      </div>
       <table>
         <thead>
           <tr>
@@ -51,7 +52,7 @@ function A_H_StudentView() {
         </thead>
         <tbody>
           {data.map((item, index) => (
-            <tr key={index}>
+            <tr key={index} onClick={() => handleRowClick(item.Term)} style={{ cursor: "pointer" }}>
               <td>{item.Submission_Date}</td>
               <td>{item.Term}</td>
               <td>{item.Term_Status}</td>
@@ -69,3 +70,4 @@ function A_H_StudentView() {
 }
 
 export default A_H_StudentView;
+

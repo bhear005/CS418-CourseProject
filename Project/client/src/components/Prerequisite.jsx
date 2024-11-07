@@ -15,7 +15,7 @@ function CourseTable() {
   }, []);
 
   const fetchData = async () => {
-    const response = await fetch(import.meta.env.VITE_API_KEY + "/classes/");
+    const response = await fetch(import.meta.env.VITE_API_KEY + "/Classes/");
     const result = await response.json();
 
     const coursesArray = Array.isArray(result.data) ? result.data : [];
@@ -24,7 +24,7 @@ function CourseTable() {
     }));
     setData(dataWithEnabled);
 
-    const responseTwo = await fetch(import.meta.env.VITE_API_KEY + "/classes/loadPrereq");
+    const responseTwo = await fetch(import.meta.env.VITE_API_KEY + "/Classes/loadPrereq");
     const resultTwo = await responseTwo.json();
 
     const coursesArrayTwo = Array.isArray(resultTwo.data) ? resultTwo.data : [];
@@ -41,7 +41,7 @@ function CourseTable() {
 
     const courseName = updatedData[index].Course_Name;
 
-    const response = await fetch(import.meta.env.VITE_API_KEY + `/classes/enablePrereq`, {
+    const response = await fetch(import.meta.env.VITE_API_KEY + "/Classes/enablePrereq", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -55,8 +55,8 @@ function CourseTable() {
       throw new Error("Unable to change Prerequisite status");
     }
 
-    // Repopulate chosen prereq list
-    const responseTwo = await fetch(import.meta.env.VITE_API_KEY + "/classes/loadPrereq");
+    // Repopulate chosen prereq list (LIKELY THE CAUSE OF CURRENT CORS ERROR)
+    const responseTwo = await fetch(import.meta.env.VITE_API_KEY + "/Classes/loadPrereq");
     const resultTwo = await responseTwo.json();
 
     const coursesArrayTwo = Array.isArray(resultTwo.data) ? resultTwo.data : [];

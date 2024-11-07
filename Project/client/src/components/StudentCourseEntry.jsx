@@ -15,13 +15,13 @@ function StudentCourseEntry() {
   // Load dropdown menus with courses from database
   useEffect(() => {
     const loadPrerequisites = async () => {
-        const response = await fetch(import.meta.env.VITE_API_KEY + "/classes/loadPrereq");
+        const response = await fetch(import.meta.env.VITE_API_KEY + "/Classes/loadPrereq");
         const result = await response.json();
         setPrerequisites(Array.isArray(result.data) ? result.data : []);
     };
 
     const loadCoursePlans = async () => {
-        const response = await fetch(import.meta.env.VITE_API_KEY + "/classes/loadNonPrereq");
+        const response = await fetch(import.meta.env.VITE_API_KEY + "/Classes/loadNonPrereq");
         const result = await response.json();
         setCoursePlans(Array.isArray(result.data) ? result.data : []);
     };
