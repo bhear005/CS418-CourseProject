@@ -55,7 +55,7 @@ classes.post("/enablePrereq", (req, res) => {
   console.log(req.body.Course_Name);
 
   connection.execute(
-    "select Prerequisite from classes where Course_Name=?",
+    "select Prerequisite from Classes where Course_Name=?",
     [req.body.Course_Name],
     function (err, result) {
       if (err) {
