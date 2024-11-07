@@ -9,6 +9,8 @@ import advisinghistory from "./routes/advisinghistory.js";
 import studentadvising from "./routes/studentadvising.js";
 
 const app=express();
+// Added to attempt to fix CORS error
+const cors = require("cors");
 const port=8080; 
 
 const myLogger = function(req,res,next){
