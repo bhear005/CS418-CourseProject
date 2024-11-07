@@ -26,7 +26,7 @@ export default function Login() {
         })
 
         // user.login command to backend
-        const result= await fetch('http://localhost:8080/user/login',{
+        const result= await fetch(import.meta.env.VITE_API_KEY + '/user/login',{
             method:"POST",
             body:formBody,
             headers:{

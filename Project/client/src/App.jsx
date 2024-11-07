@@ -11,6 +11,7 @@ import AdminDashboard from "./components/AdminDashboard";
 import Prerequisite from "./components/Prerequisite";
 import AdvisingHistory from "./components/AdvisingHistory";
 import A_H_StudentView from "./components/A_H_StudentView";
+import StudentCourseEntry from "./components/StudentCourseEntry";
 function App() {
 
   return (
@@ -26,6 +27,7 @@ function App() {
     <Route path="/prerequisite" element={<Prerequisite/>}/>
     <Route path="/advisinghistory" element={<AdvisingHistory/>}/>
     <Route path="/a_h_studentview" element={<A_H_StudentView/>}/>
+    <Route path="/studentcourseentry" element={<StudentCourseEntry/>}/>
     </Routes>
   );
 }

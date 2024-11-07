@@ -13,9 +13,10 @@ label {
 
 input[type="text"],
 input[type="Email"],
-input[type="Password"]{
+input[type="Password"]
+input[type="number"]{
   display: block;
-  width: 400px;
+  width: 200px;
   padding: 6px 12px;
   font-size: 14px;
   line-height: 1.42857143;

@@ -15,6 +15,11 @@ export default function Dashboard(){
             </button>
         </div>
         <div>
+            <button className="text-button" onClick={() => navigate('/studentcourseentry')}>
+                Course Sign Up
+            </button>
+        </div>
+        <div>
             <button className="text-button" onClick={() => navigate('/a_h_studentview')}>
                 Advising History
             </button>

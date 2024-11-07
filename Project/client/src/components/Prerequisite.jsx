@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 function CourseTable() {
   const value = localStorage.getItem("Email");
   const [data, setData] = useState([]);
+  const [dataTwo, setDataTwo] = useState([]);
   const navigate = useNavigate();
   // const [loading, setLoading] = useState(true);
 
@@ -22,6 +23,15 @@ function CourseTable() {
       ...item,
     }));
     setData(dataWithEnabled);
+
+    const responseTwo = await fetch("http://localhost:8080/classes/loadPrereq");
+    const resultTwo = await responseTwo.json();
+
+    const coursesArrayTwo = Array.isArray(resultTwo.data) ? resultTwo.data : [];
+    const dataWithEnabledTwo = coursesArrayTwo.map((itemTwo) => ({
+      ...itemTwo,
+    }));
+    setDataTwo(dataWithEnabledTwo);
   };
 
   const handleCheckboxChange = async (index) => {
@@ -44,6 +54,17 @@ function CourseTable() {
     if (!response.ok) {
       throw new Error("Unable to change Prerequisite status");
     }
+
+    // Repopulate chosen prereq list
+    const responseTwo = await fetch("http://localhost:8080/classes/loadPrereq");
+    const resultTwo = await responseTwo.json();
+
+    const coursesArrayTwo = Array.isArray(resultTwo.data) ? resultTwo.data : [];
+    const dataWithEnabledTwo = coursesArrayTwo.map((itemTwo) => ({
+      ...itemTwo,
+    }));
+    setDataTwo(dataWithEnabledTwo);
+    
 };
 
 
@@ -95,6 +116,27 @@ function CourseTable() {
             Return
           </button>
         </div>
+        <div>
+          <h2>Chosen Pre-requisite Courses</h2>
+        </div>
+        <table>
+        <thead>
+          <tr>
+            <th>Level</th>
+            <th>Courses</th>
+          </tr>
+        </thead>
+        <tbody>
+          {dataTwo.map((itemTwo, index) => (
+            <tr key={index}>
+              <td>{itemTwo.Course_Level}</td>
+              <td>{itemTwo.Course_Name}</td>
+              <td>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
       </div>
     </div>
   );

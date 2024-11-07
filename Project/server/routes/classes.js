@@ -18,6 +18,38 @@ classes.get("/", (req, res) => {
   });
 });
 
+// GET all admin declared prereq courses stored in Classes
+classes.get("/loadPrereq", (req, res) => {
+  connection.execute("select * from Classes where Prerequisite=1", function (err, result) {
+    if (err) {
+      res.json(err.message);
+    } 
+    else {
+      res.json({
+        status: 200,
+        message: "Response from user get api",
+        data: result,
+      });
+    }
+  });
+});
+
+// GET all non-prereq courses stored in Classes
+classes.get("/loadNonPrereq", (req, res) => {
+  connection.execute("select * from Classes where Prerequisite=0", function (err, result) {
+    if (err) {
+      res.json(err.message);
+    } 
+    else {
+      res.json({
+        status: 200,
+        message: "Response from user get api",
+        data: result,
+      });
+    }
+  });
+});
+
 // Checkbox API endpoint for prereq selection page
 classes.post("/enablePrereq", (req, res) => {
   console.log(req.body.Course_Name);
@@ -73,4 +105,6 @@ classes.post("/enablePrereq", (req, res) => {
     }
   );
 });
+
+
 export default classes;
