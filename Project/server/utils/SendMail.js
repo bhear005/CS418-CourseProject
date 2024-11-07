@@ -8,13 +8,13 @@ export function SendMail(email, emailSubject, emailBody) {
         secure: false,
         requireTLS: true,
         auth: {
-            user: process.env.SMTP_EMAIl,
+            user: process.env.SMTP_EMAIL,
             pass: process.env.SMTP_PASSWORD,
         },
     })
 
     const mailOption = {
-        from: process.env.SMTP_EMAIl,
+        from: process.env.SMTP_EMAIL,
         to: email,
         subject: emailSubject,
         html: emailBody,
