@@ -21,7 +21,7 @@ app.use(myLogger);
 app.use(bodyParser.json());
 app.use(cors({
     //origin:"http://localhost:5173"
-    origin: "*"
+    origin: "https://advising-portal-be407.web.app/*"
 }))
 
 app.use('/user',user);
