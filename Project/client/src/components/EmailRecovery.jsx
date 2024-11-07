@@ -16,7 +16,7 @@ export default function Recover(){
             Email: enteredEmail
         })
 
-        const result = await fetch('http://localhost:8080/user/reset/password', {
+        const result = await fetch(import.meta.env.VITE_API_KEY + '/user/reset/password', {
             method: "POST",
             body: formBody,
             headers:{

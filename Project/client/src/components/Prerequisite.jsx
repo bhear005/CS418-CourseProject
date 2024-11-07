@@ -15,7 +15,7 @@ function CourseTable() {
   }, []);
 
   const fetchData = async () => {
-    const response = await fetch("http://localhost:8080/classes/");
+    const response = await fetch(import.meta.env.VITE_API_KEY + "/classes/");
     const result = await response.json();
 
     const coursesArray = Array.isArray(result.data) ? result.data : [];
@@ -24,7 +24,7 @@ function CourseTable() {
     }));
     setData(dataWithEnabled);
 
-    const responseTwo = await fetch("http://localhost:8080/classes/loadPrereq");
+    const responseTwo = await fetch(import.meta.env.VITE_API_KEY + "/classes/loadPrereq");
     const resultTwo = await responseTwo.json();
 
     const coursesArrayTwo = Array.isArray(resultTwo.data) ? resultTwo.data : [];
@@ -41,7 +41,7 @@ function CourseTable() {
 
     const courseName = updatedData[index].Course_Name;
 
-    const response = await fetch(`http://localhost:8080/classes/enablePrereq`, {
+    const response = await fetch(import.meta.env.VITE_API_KEY + `/classes/enablePrereq`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -56,7 +56,7 @@ function CourseTable() {
     }
 
     // Repopulate chosen prereq list
-    const responseTwo = await fetch("http://localhost:8080/classes/loadPrereq");
+    const responseTwo = await fetch(import.meta.env.VITE_API_KEY + "/classes/loadPrereq");
     const resultTwo = await responseTwo.json();
 
     const coursesArrayTwo = Array.isArray(resultTwo.data) ? resultTwo.data : [];
@@ -69,7 +69,7 @@ function CourseTable() {
 
 
     const returnToDash = async () => {
-    const adminValue = await fetch(`http://localhost:8080/user/adminCheck/${value}`)
+    const adminValue = await fetch(import.meta.env.VITE_API_KEY + `/user/adminCheck/${value}`)
         if (adminValue.ok){
             navigate('/admindashboard');
         }

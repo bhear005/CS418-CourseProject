@@ -15,13 +15,13 @@ function StudentCourseEntry() {
   // Load dropdown menus with courses from database
   useEffect(() => {
     const loadPrerequisites = async () => {
-        const response = await fetch("http://localhost:8080/classes/loadPrereq");
+        const response = await fetch(import.meta.env.VITE_API_KEY + "/classes/loadPrereq");
         const result = await response.json();
         setPrerequisites(Array.isArray(result.data) ? result.data : []);
     };
 
     const loadCoursePlans = async () => {
-        const response = await fetch("http://localhost:8080/classes/loadNonPrereq");
+        const response = await fetch(import.meta.env.VITE_API_KEY + "/classes/loadNonPrereq");
         const result = await response.json();
         setCoursePlans(Array.isArray(result.data) ? result.data : []);
     };
@@ -48,7 +48,7 @@ function StudentCourseEntry() {
       Last_GPA: lastGPA
     })
 
-      const response = await fetch("http://localhost:8080/studentadvising/headerEntry", { 
+      const response = await fetch(import.meta.env.VITE_API_KEY + "/studentadvising/headerEntry", { 
         method: "POST",
         body: formBody,
         headers: {
@@ -68,7 +68,7 @@ function StudentCourseEntry() {
             Course_Name: prerequisite
           });
 
-          const response = await fetch("http://localhost:8080/studentadvising/prerequisiteEntry", {
+          const response = await fetch(import.meta.env.VITE_API_KEY + "/studentadvising/prerequisiteEntry", {
             method: "POST",
             body: formBody,
             headers: {
@@ -93,7 +93,7 @@ function StudentCourseEntry() {
             Course_Name: coursePlan
           });
 
-          const response = await fetch("http://localhost:8080/studentadvising/coursePlanEntry", { 
+          const response = await fetch(import.meta.env.VITE_API_KEY + "/studentadvising/coursePlanEntry", { 
             method: "POST",
             body: formBody,
             headers: {
@@ -134,7 +134,7 @@ function StudentCourseEntry() {
           Course_Name: coursePlan
         });
 
-        const response = await fetch("http://localhost:8080/studentadvising/duplicateCourse", { 
+        const response = await fetch(import.meta.env.VITE_API_KEY + "/studentadvising/duplicateCourse", { 
           method: "POST",
           body: formBody,
           headers: {
@@ -157,7 +157,7 @@ function StudentCourseEntry() {
           Course_Name: prerequisite
         });
 
-        const responseTwo = await fetch("http://localhost:8080/studentadvising/duplicatePrereq", {
+        const responseTwo = await fetch(import.meta.env.VITE_API_KEY + "/studentadvising/duplicatePrereq", {
           method: "POST",
           body: formBodyTwo,
           headers: {

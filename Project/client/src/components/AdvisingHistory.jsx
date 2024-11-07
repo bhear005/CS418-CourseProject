@@ -21,7 +21,7 @@ function AdvisingHistory() {
     });
 
     const response = await fetch(
-      `http://localhost:8080/advisinghistory/${enteredEmail}`
+      import.meta.env.VITE_API_KEY + `/advisinghistory/${enteredEmail}`
     );
     if (!response.ok) throw new Error("Failed to fetch data");
     const result = await response.json();
@@ -35,7 +35,7 @@ function AdvisingHistory() {
 
   const returnToDash = async () => {
     const adminValue = await fetch(
-      `http://localhost:8080/user/adminCheck/${value}`
+      import.meta.env.VITE_API_KEY + `/user/adminCheck/${value}`
     );
     if (adminValue.ok) {
       navigate("/admindashboard");

@@ -11,7 +11,7 @@ function A_H_StudentView() {
   useEffect(() => {
     (async () => {
       const response = await fetch(
-        `http://localhost:8080/advisinghistory/${value}`
+        import.meta.env.VITE_API_KEY + `/advisinghistory/${value}`
       );
       if (!response.ok) throw new Error("Failed to fetch data");
       const result = await response.json();
@@ -27,7 +27,7 @@ function A_H_StudentView() {
 
   const returnToDash = async () => {
     const adminValue = await fetch(
-      `http://localhost:8080/user/adminCheck/${value}`
+      import.meta.env.VITE_API_KEY + `/user/adminCheck/${value}`
     );
     if (adminValue.ok) {
       navigate("/admindashboard");
