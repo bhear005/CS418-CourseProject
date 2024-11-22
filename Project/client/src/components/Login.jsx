@@ -61,6 +61,7 @@ export default function Login() {
             <div>
                 <h1>Login</h1>
             </div>
+            <div class="login-container">
             <form>
                 <label>Email</label>
                 <input
@@ -90,6 +91,7 @@ export default function Login() {
                 <button className="text-button" onClick={() => navigate('/emailrecovery')}>
                     Forgot Password?
                 </button>
+            </div>
             </div>
         </div>
 

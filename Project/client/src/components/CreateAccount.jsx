@@ -80,6 +80,7 @@ export default function CreateAccount(){
             <div>
                 <h1>Account Creation</h1>
             </div>
+            <div class="container">
             <form>
                 <label>First Name</label>
                 <input type="text" className = {firstNameNotValid ? "invalid" : undefined}
@@ -105,6 +106,7 @@ export default function CreateAccount(){
                 <button className="button" onClick={handleCreateAccount}>
                     Create Account
                 </button>
+            </div>
             </div>
         </div>
     );

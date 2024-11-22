@@ -35,6 +35,7 @@ export default function Recover(){
     return(
         <div>
             <h1>Forgot your Password</h1>
+            <div class="container">
             <form>
                 <label>Enter Email Address</label>
             <input
@@ -47,6 +48,7 @@ export default function Recover(){
                 <button className="button" onClick={handleReset}>
                     Submit
                 </button>
+            </div>
             </div>
         </div>
     );

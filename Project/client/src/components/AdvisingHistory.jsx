@@ -46,6 +46,8 @@ function AdvisingHistory() {
 
   return (
     <div>
+      <h1>Student Advising History</h1>
+      <div class="container">
       <form>
         <label>
           Email:
@@ -79,6 +81,7 @@ function AdvisingHistory() {
           ))}
         </tbody>
       </table>
+      </div>
       <div>
         <button className="button" onClick={returnToDash}>
           Return

@@ -9,6 +9,7 @@ export default function Dashboard(){
     return (<>
     <div id="login">
         <h1>Welcome {value}!</h1>
+        <div class="container">
         <div>
             <button className="text-button" onClick={() => navigate('/editprofile')}>
                 Edit account info
@@ -28,6 +29,7 @@ export default function Dashboard(){
             <button className="button" onClick={() => navigate('/')}>
                 Sign Out 
             </button>
+        </div>
         </div>
     </div>
     </>);

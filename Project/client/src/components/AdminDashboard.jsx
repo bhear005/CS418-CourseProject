@@ -9,6 +9,7 @@ export default function AdminDashboard(){
     return (<>
     <div id="login">
         <h1>Welcome Admin {value}!</h1>
+        <div class="container">
         <div>
             <button className="text-button" onClick={() => navigate('/prerequisite')}>
                 Edit Student Prerequisite Courses
@@ -28,6 +29,7 @@ export default function AdminDashboard(){
             <button className="button" onClick={() => navigate('/')}>
                 Sign Out 
             </button>
+        </div>
         </div>
     </div>
     </>);

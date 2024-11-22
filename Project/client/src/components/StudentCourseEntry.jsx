@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function StudentCourseEntry() {
   const value = localStorage.getItem("Email");
@@ -9,6 +10,7 @@ function StudentCourseEntry() {
   const [lastTerm, setLastTerm] = useState("");
   const [lastGPA, setLastGPA] = useState("");
   const [currentTerm, setCurrentTerm] = useState("");
+  const navigate = useNavigate();
 
   localStorage.setItem("Email",value);
 
@@ -106,6 +108,16 @@ function StudentCourseEntry() {
       );
 
   };
+
+  const returnToDash = async () => {
+    const adminValue = await fetch(import.meta.env.VITE_API_KEY + `/user/adminCheck/${value}`)
+        if (adminValue.ok){
+            navigate('/admindashboard');
+        }
+        else{
+            navigate('/dashboard');
+        }
+    }
 
   // Execute API calls upon submission
   const handleSubmit = async (event) => {
@@ -209,6 +221,7 @@ function StudentCourseEntry() {
   return (
     <div>
       <h1>Course Plan</h1>
+      <div class="cp-container">
       <div style={{ display: "flex", gap: "10px", marginBottom: "20px" }}>
         <div>
           <label>Last Term</label>
@@ -280,6 +293,12 @@ function StudentCourseEntry() {
           Submit
         </button>
       </div>
+      </div>
+      <div>
+      <button className="button" onClick={returnToDash}>
+        Return
+      </button>
+      </div>  
     </div>
   );
 }

@@ -49,6 +49,7 @@ export default function EmailValidation(){
             <div>
                 <h1>Email Verification</h1>
             </div>
+            <div class="container">
             <form>
                 <label>Enter code</label>
                 <input type="text" className={codeNotValid ? "invalid" : undefined}
@@ -59,6 +60,7 @@ export default function EmailValidation(){
                 <button className="button" onClick={handleValidation}>
                     Submit
                 </button>
+            </div>
             </div>
         </div>
     );

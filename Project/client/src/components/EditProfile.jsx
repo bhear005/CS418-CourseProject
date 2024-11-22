@@ -111,6 +111,7 @@ export default function EditProfile() {
             <div>
                 <h1>Edit Profile</h1>
             </div>
+            <div class="container">
             <form>
                 <label>First Name</label>
                 <input type="text" className={firstNameNotValid ? "invalid" : undefined}
@@ -132,10 +133,13 @@ export default function EditProfile() {
                 <input type="Password" className={passwordNotValid ? "invalid" : undefined}
                     onChange={(event) => handleInputChange("Password", event.target.value)}
                 />
+                <div>
                 <button className="button" onClick={handleEditPassword}>
                     Submit
                 </button>
+                </div>
             </form>
+            </div>
             <div>
             <button className="button" onClick={returnToDash}>
                     Return
