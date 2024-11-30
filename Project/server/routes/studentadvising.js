@@ -237,7 +237,7 @@ studentadvising.get("/duplicateHistory", (req, res) => {
 // GET call to retrieve student advising history based on email and term
 studentadvising.post("/retrieveHistory", (req, res) => {
   connection.execute(
-    "Select * from advising_history where Email=? and Term=?",
+    "Select * from course_plan where Email=? and Current_Term=?",
     [req.body.Email, req.body.Term],
     function (err, result) {
       if (err) {
