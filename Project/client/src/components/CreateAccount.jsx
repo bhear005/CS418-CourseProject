@@ -39,7 +39,10 @@ export default function CreateAccount(){
         })
 
         // Check to see if email already exists in database
-        const result = await fetch(import.meta.env.VITE_API_KEY + '/user/check/email', {
+        const result = await fetch(
+            import.meta.env.VITE_API_KEY + '/user/check/email',
+            // `https://localhost:8080/user/check/email`, 
+            {
             method: "POST",
             body: emailCheck,
             headers:{
@@ -48,7 +51,10 @@ export default function CreateAccount(){
         });
         if (result.ok) {
             //If email doesn't already exist in database
-            const resultTwo = await fetch(import.meta.env.VITE_API_KEY + '/user/', {
+            const resultTwo = await fetch(
+                import.meta.env.VITE_API_KEY + '/user/',
+                // `https://localhost:8080/user/`, 
+                {
                 method: "POST",
                 body: formBody,
                 headers: {

@@ -29,7 +29,10 @@ export default function EditProfile() {
             First_Name: enteredFirstName
         })
 
-        const result = await fetch(import.meta.env.VITE_API_KEY + '/user/First_Name', {
+        const result = await fetch(
+            import.meta.env.VITE_API_KEY + '/user/First_Name', 
+            // `https://localhost:8080/user/First_Name`,
+            {
             method: "PUT",
             body: formBody,
             headers: {
@@ -52,7 +55,10 @@ export default function EditProfile() {
             Last_Name: enteredLastName
         })
 
-        const result = await fetch(import.meta.env.VITE_API_KEY + '/user/Last_Name', {
+        const result = await fetch(
+            import.meta.env.VITE_API_KEY + '/user/Last_Name', 
+            // `https://localhost:8080/user/Last_Name`,
+            {
             method: "PUT",
             body: formBody,
             headers: {
@@ -68,7 +74,10 @@ export default function EditProfile() {
     }
 
     const returnToDash = async () => {
-    const adminValue = await fetch(import.meta.env.VITE_API_KEY + `/user/adminCheck/${value}`)
+    const adminValue = await fetch(
+        import.meta.env.VITE_API_KEY + `/user/adminCheck/${value}`
+        // `https://localhost:8080/user/adminCheck/${value}`
+    )
         if (adminValue.ok){
             navigate('/admindashboard');
         }
@@ -85,7 +94,10 @@ export default function EditProfile() {
             Password: enteredPassword
         })
 
-        const result = await fetch(import.meta.env.VITE_API_KEY + '/user/Password', {
+        const result = await fetch(
+            import.meta.env.VITE_API_KEY + '/user/Password', 
+            // `https://localhost:8080/user/Password`,
+            {
             method: "PUT",
             body: formBody,
             headers: {

@@ -12,6 +12,7 @@ import Prerequisite from "./components/Prerequisite";
 import AdvisingHistory from "./components/AdvisingHistory";
 import A_H_StudentView from "./components/A_H_StudentView";
 import StudentCourseEntry from "./components/StudentCourseEntry";
+import CurrentTerm from "./components/CurrentTerm";
 function App() {
 
   return (
@@ -28,6 +29,7 @@ function App() {
     <Route path="/advisinghistory" element={<AdvisingHistory/>}/>
     <Route path="/a_h_studentview" element={<A_H_StudentView/>}/>
     <Route path="/studentcourseentry" element={<StudentCourseEntry/>}/>
+    <Route path="/currentterm" element={<CurrentTerm/>}/>
     </Routes>
   );
 }

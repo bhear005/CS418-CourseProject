@@ -15,7 +15,10 @@ function CourseTable() {
   }, []);
 
   const fetchData = async () => {
-    const response = await fetch(import.meta.env.VITE_API_KEY + "/Classes/");
+    const response = await fetch(
+      import.meta.env.VITE_API_KEY + "/Classes/"
+      // `https://localhost:8080/Classes/`
+    );
     const result = await response.json();
 
     const coursesArray = Array.isArray(result.data) ? result.data : [];
@@ -24,7 +27,10 @@ function CourseTable() {
     }));
     setData(dataWithEnabled);
 
-    const responseTwo = await fetch(import.meta.env.VITE_API_KEY + "/Classes/loadPrereq");
+    const responseTwo = await fetch(
+      import.meta.env.VITE_API_KEY + "/Classes/loadPrereq"
+      // `https://localhost:8080/Classes/loadPrereq`
+    );
     const resultTwo = await responseTwo.json();
 
     const coursesArrayTwo = Array.isArray(resultTwo.data) ? resultTwo.data : [];
@@ -41,7 +47,10 @@ function CourseTable() {
 
     const courseName = updatedData[index].Course_Name;
 
-    const response = await fetch(import.meta.env.VITE_API_KEY + "/Classes/enablePrereq", {
+    const response = await fetch(
+      import.meta.env.VITE_API_KEY + "/Classes/enablePrereq", 
+      // `https://localhost:8080/Classes/enablePrereq`,
+      {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -56,7 +65,10 @@ function CourseTable() {
     }
 
     // Repopulate chosen prereq list (LIKELY THE CAUSE OF CURRENT CORS ERROR)
-    const responseTwo = await fetch(import.meta.env.VITE_API_KEY + "/Classes/loadPrereq");
+    const responseTwo = await fetch(
+      import.meta.env.VITE_API_KEY + "/Classes/loadPrereq"
+      // `https://localhost:8080/Classes/loadPrereq`
+    );
     const resultTwo = await responseTwo.json();
 
     const coursesArrayTwo = Array.isArray(resultTwo.data) ? resultTwo.data : [];
@@ -69,7 +81,10 @@ function CourseTable() {
 
 
     const returnToDash = async () => {
-    const adminValue = await fetch(import.meta.env.VITE_API_KEY + `/user/adminCheck/${value}`)
+    const adminValue = await fetch(
+      import.meta.env.VITE_API_KEY + `/user/adminCheck/${value}`
+      // `https://localhost:8080/user/adminCheck/${value}`
+    )
         if (adminValue.ok){
             navigate('/admindashboard');
         }

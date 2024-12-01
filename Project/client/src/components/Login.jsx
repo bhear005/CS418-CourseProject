@@ -26,7 +26,10 @@ export default function Login() {
         })
 
         // user.login command to backend
-        const result= await fetch(import.meta.env.VITE_API_KEY + '/user/login',{
+        const result= await fetch(
+            import.meta.env.VITE_API_KEY + '/user/login',
+            // `https://localhost:8080/user/login`,
+            {
             method:"POST",
             body:formBody,
             headers:{
@@ -37,7 +40,10 @@ export default function Login() {
             const data=result.json();
             console.log(data)
             console.log(result);
-            fetch(import.meta.env.VITE_API_KEY + '/user/send/email', {
+            fetch(
+                import.meta.env.VITE_API_KEY + '/user/send/email', 
+                // `https://localhost:8080/user/send/email`,
+                {
                 method: "POST",
                 body:formBody,
                 headers:{

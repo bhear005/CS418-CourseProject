@@ -24,7 +24,10 @@ export default function Reset(){
             Email: enteredEmail   
         })
 
-        const result = await fetch(import.meta.env.VITE_API_KEY + '/user/change/password', {
+        const result = await fetch(
+            import.meta.env.VITE_API_KEY + '/user/change/password', 
+            // `https://localhost:8080/user/change/password`,
+            {
             method: "PUT",
             body: formBody,
             headers: {

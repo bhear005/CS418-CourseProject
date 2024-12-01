@@ -19,7 +19,10 @@ export default function EmailValidation(){
             Validation_Code: enteredCode
         })
 
-        const result = await fetch(import.meta.env.VITE_API_KEY + '/user/email/validation', {
+        const result = await fetch(
+            import.meta.env.VITE_API_KEY + '/user/email/validation', 
+            // `https://localhost:8080/user/email/validation`,
+            {
             method: "POST",
             body: formBody,
             headers: {
@@ -28,7 +31,10 @@ export default function EmailValidation(){
         })
 
         if (result.ok){
-            const adminValue = await fetch(import.meta.env.VITE_API_KEY + `/user/adminCheck/${value}`)
+            const adminValue = await fetch(
+                import.meta.env.VITE_API_KEY + `/user/adminCheck/${value}`
+                // `https://localhost:8080/user/adminCheck/${value}`
+            )
 
             if (adminValue.ok){
                 navigate('/admindashboard')

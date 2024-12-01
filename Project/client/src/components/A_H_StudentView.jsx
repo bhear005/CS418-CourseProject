@@ -7,10 +7,12 @@ function A_H_StudentView() {
   const navigate = useNavigate();
   localStorage.setItem("Email", value);
 
+  // API call to get advising history
   useEffect(() => {
     (async () => {
       const response = await fetch(
         import.meta.env.VITE_API_KEY + `/advisinghistory/${value}`
+        // `https://localhost:8080/advisinghistory/${value}`
       );
       if (!response.ok) throw new Error("Failed to fetch data");
       const result = await response.json();
@@ -23,6 +25,7 @@ function A_H_StudentView() {
   const returnToDash = async () => {
     const adminValue = await fetch(
       import.meta.env.VITE_API_KEY + `/user/adminCheck/${value}`
+      // `https://localhost:8080/user/adminCheck/${value}`
     );
     if (adminValue.ok) {
       navigate("/admindashboard");

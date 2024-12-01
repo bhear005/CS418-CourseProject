@@ -22,6 +22,7 @@ function AdvisingHistory() {
 
     const response = await fetch(
       import.meta.env.VITE_API_KEY + `/advisinghistory/${enteredEmail}`
+      // `https://localhost:8080/advisinghistory/${enteredEmail}`
     );
     if (!response.ok) throw new Error("Failed to fetch data");
     const result = await response.json();
@@ -36,12 +37,20 @@ function AdvisingHistory() {
   const returnToDash = async () => {
     const adminValue = await fetch(
       import.meta.env.VITE_API_KEY + `/user/adminCheck/${value}`
+      // `https://localhost:8080/user/adminCheck/${value}`
     );
     if (adminValue.ok) {
       navigate("/admindashboard");
     } else {
       navigate("/dashboard");
     }
+  };
+
+  // TBD add navigate
+  const handleRowClick = (term) => {
+    const termValue = term;
+    localStorage.setItem("Term", termValue);
+    // navigate(`/currentterm`, { state: { term } });
   };
 
   return (
@@ -73,7 +82,7 @@ function AdvisingHistory() {
         </thead>
         <tbody>
           {data.map((item, index) => (
-            <tr key={index}>
+            <tr key={index} onClick={() => handleRowClick(item.Term)} style={{ cursor: "pointer" }}>
               <td>{item.Submission_Date}</td>
               <td>{item.Term}</td>
               <td>{item.Term_Status}</td>
