@@ -108,6 +108,8 @@ classes.post("/enablePrereq", (req, res) => {
 
 // POST used to retrieve data from prerequisites table based on Email and Current_Term
 classes.post("/prereqData", (req, res) => {
+  console.log(req.body.Email);
+  console.log(req.body.Current_Term);
   connection.execute(
     "select * from prerequisite where Email=? and Current_Term=?",
     [req.body.Email, req.body.Current_Term],
@@ -127,6 +129,8 @@ classes.post("/prereqData", (req, res) => {
 
 // POST used to retrieve data from course_plan table based on Email and Current_Term
 classes.post("/coursePlanData", (req, res) => {
+  console.log(req.body.Email);
+  console.log(req.body.Current_Term);
   connection.execute(
     "select * from course_plan where Email=? and Current_Term=?",
     [req.body.Email, req.body.Current_Term],
