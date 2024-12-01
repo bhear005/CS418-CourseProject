@@ -106,5 +106,42 @@ classes.post("/enablePrereq", (req, res) => {
   );
 });
 
+// POST used to retrieve data from prerequisites table based on Email and Current_Term
+classes.post("/prereqData", (req, res) => {
+  connection.execute(
+    "select * from Prerequisites where Email=? and Current_Term=?",
+    [req.body.Email, req.body.Current_Term],
+    function (err, result) {
+      if (err) {
+        res.json(err.message);
+      } else {
+        res.json({
+          status: 200,
+          message: "Response from user post api",
+          data: result,
+        });
+      }
+    }
+  );
+});
+
+// POST used to retrieve data from course_plan table based on Email and Current_Term
+classes.post("/coursePlanData", (req, res) => {
+  connection.execute(
+    "select * from course_plan where Email=? and Current_Term=?",
+    [req.body.Email, req.body.Current_Term],
+    function (err, result) {
+      if (err) {
+        res.json(err.message);
+      } else {
+        res.json({
+          status: 200,
+          message: "Response from user post api",
+          data: result,
+        });
+      }
+    }
+  );
+});
 
 export default classes;
