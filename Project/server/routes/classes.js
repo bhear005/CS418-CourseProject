@@ -109,7 +109,7 @@ classes.post("/enablePrereq", (req, res) => {
 // POST used to retrieve data from prerequisites table based on Email and Current_Term
 classes.post("/prereqData", (req, res) => {
   connection.execute(
-    "select * from prerequisites where Email=? and Current_Term=?",
+    "select * from prerequisite where Email=? and Current_Term=?",
     [req.body.Email, req.body.Current_Term],
     function (err, result) {
       if (err) {
