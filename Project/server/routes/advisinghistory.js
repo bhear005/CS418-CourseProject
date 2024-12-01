@@ -22,4 +22,26 @@ advisinghistory.get("/:Email", (req, res) => {
   );
 });
 
+// GET data store in advising history based on student email and term
+advisinghistory.get("/:Email/:Term", (req, res) => {
+  console.log(req.params.Email);
+  console.log(req.params.Term);
+  connection.execute(
+    "select * from advising_history where Email=? and Term=?",
+    [req.params.Email, req.params.Term],
+    function (err, result) {
+      if (err) {
+        res.json(err.message);
+      } else {
+        res.json({
+          status: 200,
+          message: "Response from user get api",
+          data: result,
+        });
+      }
+    }
+  );
+});
+
+
 export default advisinghistory;
