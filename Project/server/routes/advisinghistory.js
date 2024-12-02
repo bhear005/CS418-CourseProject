@@ -43,5 +43,48 @@ advisinghistory.get("/:Email/:Term", (req, res) => {
   );
 });
 
+// POST used to amend Term_Status to "Denied" in advising_history table
+advisinghistory.post("/reject", (req, res) => {
+  console.log(req.body.Email);
+  console.log(req.body.Term);
+  connection.execute(
+    "update advising_history set Term_Status='Denied' where Email=? and Term=?",
+    [req.body.Email, req.body.Term],
+    function (err, result) {
+      if (err) {
+        res.json(err.message);
+      } else {
+        res.json({
+          status: 200,
+          message: "Response from user post api",
+          data: result,
+        });
+      }
+    }
+  );
+});
+
+// POST used to amend Term_Status to "Approved" in advising_history table
+advisinghistory.post("/approve", (req, res) => {
+  console.log(req.body.Email);
+  console.log(req.body.Term);
+  connection.execute(
+    "update advising_history set Term_Status='Approved' where Email=? and Term=?",
+    [req.body.Email, req.body.Term],
+    function (err, result) {
+      if (err) {
+        res.json(err.message);
+      } else {
+        res.json({
+          status: 200,
+          message: "Response from user post api",
+          data: result,
+        });
+      }
+    }
+  );
+});
+
+
 
 export default advisinghistory;
