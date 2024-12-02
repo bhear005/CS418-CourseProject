@@ -50,7 +50,7 @@ advisinghistory.post("/reject", (req, res) => {
   console.log(req.body.Term);
   console.log(req.body.comments);
   SendMail(
-    req.body.Email, "Advising Request Denied", `Your advising request for term ${req.body.Term} has been denied. 
+    req.body.Email, "Advising Request Denied", `Your advising request for ${req.body.Term} term has been denied. 
     Advisor comments: ${req.body.comments}`);
   connection.execute(
     "update advising_history set Term_Status='Denied' where Email=? and Term=?",
@@ -75,7 +75,7 @@ advisinghistory.post("/approve", (req, res) => {
   console.log(req.body.Term);
   console.log(req.body.comments);
   SendMail(
-    req.body.Email, "Advising Approval", `Your advising request for term ${req.body.Term} has been approved!
+    req.body.Email, "Advising Request Approval", `Your advising request for the ${req.body.Term} term has been approved!
     Advisor comments: ${req.body.comments}`);
   connection.execute(
     "update advising_history set Term_Status='Approved' where Email=? and Term=?",
