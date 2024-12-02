@@ -47,6 +47,7 @@ advisinghistory.get("/:Email/:Term", (req, res) => {
 advisinghistory.post("/reject", (req, res) => {
   console.log(req.body.Email);
   console.log(req.body.Term);
+  console.log(req.body.comments);
   connection.execute(
     "update advising_history set Term_Status='Denied' where Email=? and Term=?",
     [req.body.Email, req.body.Term],
@@ -68,6 +69,7 @@ advisinghistory.post("/reject", (req, res) => {
 advisinghistory.post("/approve", (req, res) => {
   console.log(req.body.Email);
   console.log(req.body.Term);
+  console.log(req.body.comments);
   connection.execute(
     "update advising_history set Term_Status='Approved' where Email=? and Term=?",
     [req.body.Email, req.body.Term],
