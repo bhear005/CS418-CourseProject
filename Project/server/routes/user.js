@@ -189,7 +189,7 @@ user.post("/login", (req, res) => {
         res.json(err.message);
       } else {
         if (ComparePasword(req.body.Password, result[0].Password) && result[0].Email_Validated === 1) {
-          console.log("in if statement");
+          // console.log("in if statement");
           //SendMail(req.body.email,"Login Verification","Your login verification is 1234567")
 
           res.json({

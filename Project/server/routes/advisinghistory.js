@@ -25,8 +25,8 @@ advisinghistory.get("/:Email", (req, res) => {
 
 // GET data store in advising history based on student email and term
 advisinghistory.get("/:Email/:Term", (req, res) => {
-  console.log(req.params.Email);
-  console.log(req.params.Term);
+  // console.log(req.params.Email);
+  // console.log(req.params.Term);
   connection.execute(
     "select * from advising_history where Email=? and Term=?",
     [req.params.Email, req.params.Term],

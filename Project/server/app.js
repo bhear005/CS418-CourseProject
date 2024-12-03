@@ -12,9 +12,9 @@ const app=express();
 const port=8080; 
 
 const myLogger = function(req,res,next){
-    console.log('Calling Api');
+    // console.log('Calling Api');
     next()
-    console.log('Api call finished');
+    // console.log('Api call finished');
 }
 
 app.use(myLogger);

@@ -6,7 +6,6 @@ function AdvisingHistory() {
   const [data, setData] = useState([]);
   const [enteredEmail, setEnteredEmail] = useState("");
   const navigate = useNavigate();
-
   localStorage.setItem("Email", value);
 
   function handleInputChange(e) {
@@ -16,13 +15,14 @@ function AdvisingHistory() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    localStorage.setItem("studentEmail", enteredEmail);
+
     const formBody = JSON.stringify({
       Email: enteredEmail,
     });
 
     const response = await fetch(
       import.meta.env.VITE_API_KEY + `/advisinghistory/${enteredEmail}`
-      // `https://localhost:8080/advisinghistory/${enteredEmail}`
     );
     if (!response.ok) throw new Error("Failed to fetch data");
     const result = await response.json();
@@ -37,7 +37,6 @@ function AdvisingHistory() {
   const returnToDash = async () => {
     const adminValue = await fetch(
       import.meta.env.VITE_API_KEY + `/user/adminCheck/${value}`
-      // `https://localhost:8080/user/adminCheck/${value}`
     );
     if (adminValue.ok) {
       navigate("/admindashboard");
@@ -46,50 +45,51 @@ function AdvisingHistory() {
     }
   };
 
-  // TBD add navigate
   const handleRowClick = (term) => {
     const termValue = term;
     localStorage.setItem("Term", termValue);
-    // navigate(`/currentterm`, { state: { term } });
+    navigate(`/advisorview`, { state: { term } });
   };
 
   return (
     <div>
       <h1>Student Advising History</h1>
-      <div class="container">
-      <form>
-        <label>
-          Email:
-          <input
-            type="email"
-            value={enteredEmail}
-            onChange={handleInputChange}
-            required
-          />
-        </label>
-        <button className="button" onClick={handleSubmit}>
-          Submit
-        </button>
-      </form>
+      <div className="container">
+        <form>
+          <label>
+            Email:
+            <input
+              type="email"
+              value={enteredEmail}
+              onChange={handleInputChange}
+              required
+            />
+          </label>
+          <button className="button" onClick={handleSubmit}>
+            Submit
+          </button>
+        </form>
 
-      <table>
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Term</th>
-            <th>Term Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((item, index) => (
-            <tr key={index} onClick={() => handleRowClick(item.Term)} style={{ cursor: "pointer" }}>
-              <td>{item.Submission_Date}</td>
-              <td>{item.Term}</td>
-              <td>{item.Term_Status}</td>
+        <table>
+          <thead>
+            <tr>
+              <th>Student</th>
+              <th>UIN</th>
+              <th>Term</th>
+              <th>Status</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {data.map((item, index) => (
+              <tr key={index} onClick={() => handleRowClick(item.Term)} style={{ cursor: "pointer" }}>
+                <td>{item.Name}</td>
+                <td>{item.UIN}</td>
+                <td>{item.Term}</td>
+                <td>{item.Term_Status}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
       <div>
         <button className="button" onClick={returnToDash}>
