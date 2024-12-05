@@ -7,6 +7,7 @@ export default function EditProfile() {
     const [enteredLastName, setEnteredLastName] = useState("");
     const [enteredPassword, setEnteredPassword] = useState("");
     const [submitted, setSubmitted] = useState(false);
+    const [passwordError, setPasswordError] = useState("");
     const navigate = useNavigate();
 
     function handleInputChange(identifier, value) {
@@ -89,6 +90,14 @@ export default function EditProfile() {
     const handleEditPassword = async () => {
         setSubmitted(true);
 
+
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+        if (!passwordRegex.test(enteredPassword)) {
+            setPasswordError("Ensure the password entered is at least 8 characters in length, includes lowercase and uppercase letters, and has at least 1 number and special character.");
+            return;
+        } else {
+            setPasswordError("");
+        }
         const formBody = JSON.stringify({
             Email: value,
             Password: enteredPassword
@@ -145,6 +154,7 @@ export default function EditProfile() {
                 <input type="Password" className={passwordNotValid ? "invalid" : undefined}
                     onChange={(event) => handleInputChange("Password", event.target.value)}
                 />
+                {passwordError && <p className="error">{passwordError}</p>}
                 <div>
                 <button className="button" onClick={handleEditPassword}>
                     Submit

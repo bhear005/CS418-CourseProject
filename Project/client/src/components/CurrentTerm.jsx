@@ -30,7 +30,7 @@ function CurrentTerm() {
   useEffect(() => {
     const loadPrerequisites = async () => {
       const response = await fetch(
-        import.meta.env.VITE_API_KEY + "/Classes/loadPrereq"
+        import.meta.env.VITE_API_KEY + "/classes/loadPrereq"
       );
       const result = await response.json();
       setPrerequisites(Array.isArray(result.data) ? result.data : []);
@@ -38,7 +38,7 @@ function CurrentTerm() {
 
     const loadCoursePlans = async () => {
       const response = await fetch(
-        import.meta.env.VITE_API_KEY + "/Classes/loadNonPrereq"
+        import.meta.env.VITE_API_KEY + "/classes/loadNonPrereq"
       );
       const result = await response.json();
       setCoursePlans(Array.isArray(result.data) ? result.data : []);
